@@ -1,0 +1,16 @@
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: mysql-data
+  namespace: threads
+  labels:
+    app: mysql
+    app.kubernetes.io/part-of: threads-store
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 10Gi
+  # No storageClassName on purpose: the cluster's default StorageClass is
+  # used (on GKE Autopilot that is the default pd.csi.storage.gke.io class).

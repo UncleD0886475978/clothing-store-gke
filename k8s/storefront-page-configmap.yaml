@@ -1,0 +1,87 @@
+# Demo storefront page for Threads & Co., served by nginx from this ConfigMap.
+# setup.sh deploy applies it before the web Deployment, which mounts
+# index.html at /usr/share/nginx/html/index.html.
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: storefront-page
+  namespace: threads
+  labels:
+    app: storefront-web
+    app.kubernetes.io/part-of: threads-store
+data:
+  index.html: |
+    <!DOCTYPE html>
+    <!-- Demo storefront page served from a ConfigMap — replace with the real storefront build -->
+    <html lang="en">
+    <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Threads &amp; Co. — Online Store</title>
+    <style>
+      * { margin: 0; padding: 0; box-sizing: border-box; }
+      body { font-family: Georgia, 'Times New Roman', serif; color: #23202b; background: #faf7f2; }
+      header { display: flex; justify-content: space-between; align-items: center; padding: 18px 40px; background: #23202b; color: #f5efe4; }
+      header .logo { font-size: 1.5rem; letter-spacing: 2px; }
+      header nav a { color: #f5efe4; text-decoration: none; margin-left: 22px; font-family: Helvetica, Arial, sans-serif; font-size: 0.9rem; }
+      .hero { text-align: center; padding: 72px 24px 56px; background: linear-gradient(135deg, #e9dfcf 0%, #d9c7a7 100%); }
+      .hero h1 { font-size: 2.8rem; margin-bottom: 14px; }
+      .hero p { font-size: 1.1rem; color: #55483a; margin-bottom: 26px; }
+      .hero a.button { display: inline-block; background: #23202b; color: #fff; padding: 13px 30px; border-radius: 999px; text-decoration: none; font-family: Helvetica, Arial, sans-serif; }
+      .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 24px; max-width: 1080px; margin: 48px auto; padding: 0 24px; }
+      .card { background: #fff; border: 1px solid #e5ddcf; border-radius: 12px; overflow: hidden; }
+      .card .swatch { height: 150px; }
+      .card .body { padding: 18px; }
+      .card h3 { font-size: 1.05rem; margin-bottom: 6px; }
+      .card .cat { font-family: Helvetica, Arial, sans-serif; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 1px; color: #9a8a6d; margin-bottom: 8px; }
+      .card .price { font-weight: bold; font-size: 1.1rem; }
+      footer { text-align: center; padding: 28px 16px; background: #23202b; color: #cfc6b4; font-family: Helvetica, Arial, sans-serif; font-size: 0.85rem; }
+    </style>
+    </head>
+    <body>
+    <header>
+      <div class="logo">THREADS &amp; CO.</div>
+      <nav>
+        <a href="#">New In</a>
+        <a href="#">Women</a>
+        <a href="#">Men</a>
+        <a href="#">Sale</a>
+        <a href="#">Cart (0)</a>
+      </nav>
+    </header>
+    <section class="hero">
+      <h1>Clothing that fits your life</h1>
+      <p>Everyday essentials and seasonal favorites — designed in-house, delivered to your door.</p>
+      <a class="button" href="#shop">Shop the collection</a>
+    </section>
+    <main class="grid" id="shop">
+      <article class="card">
+        <div class="swatch" style="background:#b5533c"></div>
+        <div class="body"><div class="cat">Women · Knitwear</div><h3>Merino Crew Sweater</h3><p class="price">$68.00</p></div>
+      </article>
+      <article class="card">
+        <div class="swatch" style="background:#33536e"></div>
+        <div class="body"><div class="cat">Men · Denim</div><h3>Slim-Fit Selvedge Jeans</h3><p class="price">$84.00</p></div>
+      </article>
+      <article class="card">
+        <div class="swatch" style="background:#e3dcc8"></div>
+        <div class="body"><div class="cat">Unisex · Basics</div><h3>Organic Cotton Tee</h3><p class="price">$28.00</p></div>
+      </article>
+      <article class="card">
+        <div class="swatch" style="background:#5c6650"></div>
+        <div class="body"><div class="cat">Women · Outerwear</div><h3>Waxed Canvas Field Jacket</h3><p class="price">$142.00</p></div>
+      </article>
+      <article class="card">
+        <div class="swatch" style="background:#c9a227"></div>
+        <div class="body"><div class="cat">Men · Shirts</div><h3>Oxford Button-Down Shirt</h3><p class="price">$58.00</p></div>
+      </article>
+      <article class="card">
+        <div class="swatch" style="background:#7d5a78"></div>
+        <div class="body"><div class="cat">Women · Dresses</div><h3>Linen Wrap Dress</h3><p class="price">$96.00</p></div>
+      </article>
+    </main>
+    <footer>
+      <p>Threads &amp; Co. — demo storefront running on GKE Autopilot · Free shipping over $75 · 30-day returns</p>
+    </footer>
+    </body>
+    </html>

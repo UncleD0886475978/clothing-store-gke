@@ -1,0 +1,33 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: mysql
+  namespace: threads
+  labels:
+    app: mysql
+    app.kubernetes.io/part-of: threads-store
+spec:
+  type: ClusterIP
+  selector:
+    app: mysql
+  ports:
+    - name: mysql
+      port: 3306
+      targetPort: 3306
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: mysql-headless
+  namespace: threads
+  labels:
+    app: mysql
+    app.kubernetes.io/part-of: threads-store
+spec:
+  clusterIP: None
+  selector:
+    app: mysql
+  ports:
+    - name: mysql
+      port: 3306
+      targetPort: 3306
